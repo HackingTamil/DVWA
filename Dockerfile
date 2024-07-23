@@ -17,4 +17,5 @@ RUN apt-get update \
 
 COPY --chown=www-data:www-data . .
 
+RUN service mysql start
 RUN mysql -u root -p -e "CREATE DATABASE dvwa;"
