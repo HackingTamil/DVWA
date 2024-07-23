@@ -16,6 +16,5 @@ RUN apt-get update \
  && docker-php-ext-install gd pdo pdo_mysql
 
 COPY --chown=www-data:www-data . .
-COPY --chown=www-data:www-data config/config.inc.php.dist config/config.inc.php
 
 RUN mysql -u root -p -e "CREATE DATABASE dvwa;"
