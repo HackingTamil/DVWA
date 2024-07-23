@@ -9,13 +9,11 @@ WORKDIR /var/www/html
 # https://www.php.net/manual/en/image.installation.php
 RUN apt-get update \
  && export DEBIAN_FRONTEND=noninteractive \
- && apt-get install -y default-mysql-server zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping \
+ && apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev iputils-ping \
  && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
  && docker-php-ext-configure gd --with-jpeg --with-freetype \
  # Use pdo_sqlite instead of pdo_mysql if you want to use sqlite
- && docker-php-ext-install gd pdo pdo_mysql
+ && docker-php-ext-install gd mysqli pdo pdo_mysql
 
 COPY --chown=www-data:www-data . .
-
-RUN service mysql start
 RUN mysql -u root -p -e "CREATE DATABASE dvwa;"
